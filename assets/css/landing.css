@@ -1,0 +1,1315 @@
+/* Unified Styles (Merged from modern.css and landing.css) */
+
+:root {
+  /* Dark Theme Palette - From Image & Refinements */
+  --primary-color: #6366f1; /* Accent blue, good for buttons/links */
+  --primary-dark: #4f46e5; /* Darker accent */
+  --secondary-color: #10b981; /* Accent green (can be used sparingly) */
+  --dark-bg: #111827; /* Main dark background */
+  --darker-bg: #0f172a; /* Slightly darker variant */
+  --card-bg: #181818; /* Card background from image */
+  --tag-bg: #282828; /* Tag background from image */
+  --light-text: #f9fafb; /* Primary light text */
+  --muted-text: #b3b3b3; /* Muted text color (from image) */
+  --border-color: rgba(255, 255, 255, 0.1); /* Border color for dark */
+
+  --border-radius: 8px;
+  --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+
+  /* Accent Colors (Keep for potential use) */
+  --accent-blue: #4e73df;
+  --accent-purple: #6f42c1;
+  --accent-gold: #e9c46a;
+
+  /* Typography */
+  --heading-font: 'Inter', 'Segoe UI', sans-serif;
+  --body-font: 'Inter', 'Segoe UI', sans-serif;
+  --mono-font: 'Fira Code', 'Consolas', monospace;
+
+  /* Variables from landing.css for compatibility (adjust if needed) */
+  --bg-color: var(--dark-bg); /* Map to new variables */
+  --bg-color-alt: var(--darker-bg);
+  --primary-color-10: rgba(99, 102, 241, 0.1);
+  --secondary-color-10: rgba(16, 185, 129, 0.1);
+  --primary-color-25: rgba(99, 102, 241, 0.25);
+  --secondary-color-25: rgba(16, 185, 129, 0.25);
+  --primary-color-50: rgba(99, 102, 241, 0.5);
+  --secondary-color-50: rgba(16, 185, 129, 0.5);
+  --text-color: var(--light-text);
+  --text-color-muted: var(--muted-text);
+}
+
+/* Reset (from modern.css) */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img,
+ol, ul, li, fieldset, form, label, article, aside, figure, footer, header,
+nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Base (from modern.css) */
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Typography (Combined & Refined) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--light-text); /* White headings */
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: 3.5rem; /* Slightly adjusted */
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: var(--muted-text);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Wrapper */
+#wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* New Background Elements Container */
+#background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Explicitly set to viewport height */
+  overflow: hidden;
+  z-index: 0; /* Behind #intro */
+  pointer-events: none; /* Don't interfere with clicks */
+}
+
+/* Apply radial gradients to the background container */
+#background-elements::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent 60%);
+  z-index: -1; /* Behind other elements in this container */
+  pointer-events: none;
+}
+
+/* Update selectors for moved elements */
+#background-elements .data-particle,
+#background-elements .data-grid,
+#background-elements .chart-icon,
+#background-elements .data-ring {
+  position: absolute; /* Ensure they are positioned within the container */
+  z-index: 0; /* Keep behind actual content */
+  pointer-events: none;
+}
+
+/* Fade-in Animation */
+.fade-in, .fade-in-up {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Intro Section (Combined & Refined) */
+#intro {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center;
+  padding: 3rem 2rem; /* Reduced vertical padding */
+  background: transparent; /* Make intro background see-through */
+  overflow: visible; /* Allow potential hover effects to overflow if needed */
+  z-index: 1; /* Ensure intro establishes stacking context above background */
+}
+
+/* Remove intro::before styles as they were moved */
+/* #intro::before { ... } */
+
+#intro * {
+  position: relative;
+  z-index: 2; /* Ensure content is above ::before and #background-elements */
+}
+
+/* Floating elements (Now inside #background-elements) */
+/* Note: Their positioning (top/left/right/bottom %) is relative to #background-elements */
+/*
+.floating-element {
+  position: absolute;
+  z-index: 0; 
+  opacity: 0.15;
+  filter: blur(5px);
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  pointer-events: none;
+}
+
+.float-1 { top: 15%; left: 10%; width: 120px; height: 120px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; animation-name: float-bob-1; animation-duration: 18s; }
+.float-2 { top: 60%; right: 15%; width: 180px; height: 180px; background: linear-gradient(135deg, var(--accent-gold), var(--secondary-color)); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: rotate(15deg); animation-name: float-bob-2; animation-duration: 22s;}
+.float-3 { bottom: 15%; left: 20%; width: 150px; height: 150px; background: linear-gradient(135deg, var(--primary-color), var(--accent-purple)); border-radius: 50%; animation-name: float-bob-3; animation-duration: 25s;}
+.float-4 { top: 25%; right: 20%; width: 80px; height: 80px; background: linear-gradient(135deg, var(--secondary-color), var(--accent-blue)); border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%; animation-name: float-bob-4; animation-duration: 16s;}
+.float-5 { bottom: 30%; right: 10%; width: 100px; height: 100px; background: linear-gradient(135deg, var(--accent-purple), var(--primary-dark)); border-radius: 70% 30% 40% 60% / 60% 50% 50% 40%; animation-name: float-bob-5; animation-duration: 20s;}
+*/
+
+/* Remove Floating Keyframes */
+/*
+@keyframes float-bob-1 { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(8deg); } 100% { transform: translateY(0) rotate(0deg); } }
+@keyframes float-bob-2 { 0% { transform: translateY(0) rotate(15deg); } 50% { transform: translateY(30px) rotate(25deg); } 100% { transform: translateY(0) rotate(15deg); } }
+@keyframes float-bob-3 { 0% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.05); } 100% { transform: translateY(0) scale(1); } }
+@keyframes float-bob-4 { 0% { transform: translateY(0) rotate(0); } 50% { transform: translateY(20px) rotate(-12deg); } 100% { transform: translateY(0) rotate(0); } }
+@keyframes float-bob-5 { 0% { transform: translateY(0) rotate(0) scale(1); border-radius: 70% 30% 40% 60% / 60% 50% 50% 40%; } 50% { transform: translateY(-15px) rotate(15deg) scale(1.03); border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%; } 100% { transform: translateY(0) rotate(0) scale(1); border-radius: 70% 30% 40% 60% / 60% 50% 50% 40%; } }
+*/
+
+/* Intro heading style */
+#intro h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  background: linear-gradient(to right, var(--light-text), var(--muted-text));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#intro h1 span {
+  display: block;
+  font-size: 0.7em; /* Smaller subtitle */
+  font-weight: 600;
+  color: var(--muted-text); /* Use muted text color */
+  margin-top: 0.5rem;
+  -webkit-background-clip: initial; /* Reset clipping */
+  -webkit-text-fill-color: initial; /* Reset fill color */
+  background: none; /* Remove gradient */
+}
+
+#intro p {
+  font-size: 1.2rem;
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+  color: var(--muted-text);
+}
+
+#intro p a {
+  color: var(--primary-color);
+  font-weight: 600;
+  border-bottom: 1px dotted var(--primary-color);
+}
+#intro p a:hover {
+  color: var(--primary-dark);
+  border-bottom-style: solid;
+}
+
+/* Skill Badges (Unified) */
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2.5rem; /* Added more bottom margin */
+}
+
+.skill-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--light-text);
+  transition: var(--transition);
+}
+
+.skill-badge:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
+
+/* Stats Container */
+.stats-container {
+  display: flex;
+  justify-content: center; /* Center items */
+  text-align: center;
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Add gap */
+  margin-bottom: 1.5rem; /* Add margin below stats */
+}
+
+.stat-item {
+  padding: 1.5rem; /* Increase padding */
+  margin: 0; /* Remove margin, use gap */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 140px; /* Increase min-width */
+  transition: var(--transition);
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--light-text), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem; /* Reduced font size */
+  color: var(--muted-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em; /* Slightly reduced letter spacing */
+  line-height: 1.2; /* Added line-height for potential wrapping */
+  word-wrap: break-word; /* Help break long words if necessary */
+}
+
+/* Styles for the Projects button within the intro */
+#intro .actions {
+  padding: 0;
+  margin: 1.6rem 0 0; /* Set default (desktop) margin-top */
+  list-style: none;
+  /* Ensure it's centered if not already */
+  display: flex;
+  justify-content: center;
+}
+
+#intro .actions .button {
+  /* Modernized text button style - Styles moved back here */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  color: var(--light-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: auto; 
+  height: auto;
+  line-height: normal;
+  padding: 0.8rem 2.5rem;
+  border-radius: 999px; /* Pill shape */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  animation: none; 
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  font-size: 0.9rem;
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+/* Remove styling for the no-longer-present icon */
+/*
+#intro .actions .button .fa-arrow-down {
+  margin-left: 0.75em;
+  font-size: 1em;
+  vertical-align: middle;
+}
+*/
+
+#intro .actions .button .label {
+  display: inline;
+}
+
+#intro .actions .button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Wrapper for Nav */
+.intro-nav-wrapper {
+  display: flex; /* Keep flex */
+  flex-direction: column; /* Keep column */
+  align-items: center; /* Keep center */
+  /* gap: 1.5rem; // No gap needed if only nav inside */
+  margin-top: 0; /* Remove negative margin */
+  margin-bottom: 2rem; /* Keep space before #main */
+  position: relative; /* Keep relative */
+  z-index: auto; /* Reset z-index */
+  padding: 0 1.5rem; /* Keep side padding */
+}
+
+/* Remove styles previously targeting the button within the wrapper */
+/* .intro-nav-wrapper .actions { ... } */
+/* .intro-nav-wrapper .actions .button { ... } */
+/* .intro-nav-wrapper .actions .button:hover { ... } */
+
+/* Nav styles remain adjusted for wrapper */
+#nav {
+  background: var(--darker-bg); 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /* position: sticky; // REMOVED */
+  /* top: 0; // REMOVED */
+  z-index: auto; /* Reset z-index */
+  padding: 0;
+  transition: var(--transition);
+  width: 100%; /* Nav takes full width of wrapper */
+  max-width: 1100px; /* Limit nav width itself */
+  margin: 0 auto; /* Center nav within wrapper */
+  border-radius: 8px; /* Add slight rounding */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+#nav > .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* max-width: 1100px; // Handled by #nav now */
+  /* margin: 0 auto; // Handled by #nav now */
+  padding: 0.6rem 1.5rem 0.4rem; 
+  position: static; 
+}
+
+#nav ul {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav ul.links {
+  gap: 0.75rem;
+  /* No specific centering needed here, space-between handles placement */
+}
+
+#nav ul.links li {
+  margin: 0;
+  display: flex;
+}
+
+#nav ul.links li a {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.7rem 1.5rem; /* Increased padding */
+  transition: var(--transition);
+  color: var(--muted-text);
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Remove dot indicator */
+#nav ul.links li.active a::after {
+  display: none;
+}
+
+#nav ul.links li a:hover,
+#nav ul.links li a:focus {
+  color: var(--light-text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Active state - Light background like image 2 */
+#nav ul.links li.active a {
+  color: #111827; /* Dark text */
+  background-color: #f8f9fa; /* Light background (off-white) */
+  font-weight: 600;
+  box-shadow: none; /* Remove previous shadow */
+}
+
+#nav ul.icons {
+  padding: 0;
+  gap: 0.75rem;
+  position: static; /* Remove absolute positioning */
+}
+
+#nav ul.icons li {
+  margin: 0; /* Remove margin, use gap */
+  display: flex;
+}
+
+#nav ul.icons li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem; /* Adjust padding for icons */
+  color: var(--muted-text); /* Initial color */
+  transition: var(--transition);
+  font-size: 1.1rem; /* Icon size */
+  background: none;
+  border: none;
+  border-radius: 6px;
+  line-height: 1; /* Ensure line height doesn't interfere */
+}
+
+/* Explicitly style the Font Awesome icon pseudo-element */
+#nav ul.icons li a .icon.brands::before {
+  display: inline-block; /* Ensure it's displayed */
+  font-family: "Font Awesome 5 Brands"; /* Ensure correct font */
+  font-weight: 400; /* Standard weight for brands */
+  color: var(--light-text); /* Make icons clearly visible (white) */
+  /* font-size: inherit; */ /* Inherit size from parent <a> */
+  line-height: inherit; /* Inherit line height */
+  vertical-align: middle; /* Align vertically */
+}
+
+/* Hide the text label for icons */
+#nav ul.icons li a .label {
+  display: none;
+}
+
+#nav ul.icons li a:hover {
+  color: var(--primary-color); /* Change color on hover */
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Ensure hover state also applies to the icon color if needed */
+#nav ul.icons li a:hover .icon.brands::before {
+   color: var(--primary-color); /* Match hover color */
+}
+
+/* Main Content Area - Adjust top margin */
+#main {
+  padding: 3rem 2.5rem; /* Added top/bottom padding */
+  background-color: #ffffff; /* White background */
+  max-width: 1100px;
+  margin: 0 auto 3rem; /* Set top margin to 0 */
+  border-radius: 8px; /* Consistent radius */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 5;
+}
+
+/* Headings within #main (but outside cards) */
+#main > h2, /* Target direct h2 if any */
+#main > section > header h2,
+#main h2:not(.post header h2):not(.posts header h2) {
+  color: #1a202c;
+  border-bottom: 1px solid #e5e7eb; /* Lighter border */
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* Paragraphs within #main (but outside cards) */
+#main > p,
+#main p:not(.post p):not(.posts p) {
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 45em; /* Limit width for readability on white */
+  margin-left: auto; /* Center if needed, depends on container */
+  margin-right: auto;
+}
+
+/* Links within #main (but outside cards) */
+#main > a,
+#main a:not(.post a):not(.posts a):not(.button) {
+  color: #4f46e5; /* Use primary dark for links on white */
+  font-weight: 500;
+}
+#main a:not(.post a):not(.posts a):not(.button):hover {
+  color: #3730a3; /* Even darker */
+  text-decoration: underline;
+}
+
+/* Style code block inside #main */
+#main .code-block {
+  background-color: #f8f9fa; /* Light grey background */
+  border: 1px solid #e5e7eb; /* Light border */
+  border-radius: 6px;
+  padding: 1.5rem;
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #374151; /* Default dark text color */
+  overflow-x: auto; /* Add scroll if code is too wide */
+}
+
+#main .code-block span {
+  color: #1a202c; /* Darker color for general code */
+}
+
+#main .code-block .comment {
+  color: #6a737d; /* Grey for comments */
+  font-style: italic;
+}
+
+#main .code-block .keyword {
+  color: #d73a49; /* Reddish for keywords */
+  font-weight: 600;
+}
+
+#main .code-block .string {
+  color: #032f62; /* Blue for strings */
+}
+
+/* Featured Post - Display content directly on #main */
+#main .post.featured {
+  background: none; /* Remove dark background */
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  margin-bottom: 3rem; /* Adjust spacing */
+  border: none;
+  padding: 0; /* Remove padding */
+  color: inherit; /* Inherit text color from #main */
+}
+
+/* Featured Post Header - Adjusted for white bg */
+#main .post.featured header.major {
+  padding: 0 0 1.5rem 0;
+  border-bottom: none; /* Remove border */
+  margin-bottom: 1.5rem; /* Adjust spacing */
+  text-align: center; /* Center header content */
+}
+
+#main .post.featured header.major h2 {
+  font-size: 2.8rem; /* Larger title */
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #111827; /* Dark heading color */
+  text-transform: uppercase; /* Uppercase like image */
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#main .post.featured header.major h2 a {
+  color: inherit; /* Inherit dark color */
+  background-image: none; /* Remove underline effect */
+  padding-bottom: 0;
+}
+#main .post.featured header.major h2 a:hover {
+  color: #4f46e5; /* Hover color */
+  background-size: auto; /* Reset background size */
+}
+
+/* Featured Post Paragraph - Adjusted for white bg */
+#main .post.featured p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4b5563; /* Standard paragraph color on white */
+  margin-bottom: 1.5rem;
+  max-width: 50em; /* Limit width for readability */
+  text-align: center; /* Center text */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Featured Post Tags - Adjusted for white bg */
+#main .post.featured .tags {
+  margin: 2rem 0;
+  padding: 0;
+  justify-content: center; /* Center tags */
+}
+#main .post.featured .tag {
+  background: #e5e7eb; /* Light grey background */
+  color: #374151; /* Dark text */
+  font-size: 0.75rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+#main .post.featured .tag:hover {
+  background: #d1d5db; /* Darker grey hover */
+  color: #1f2937;
+}
+
+/* Featured Post Image - Display directly on white */
+#main .post.featured .image.main {
+  margin: 2rem auto 0; /* Center image */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: auto;
+  opacity: 1;
+  max-width: 800px; /* Limit image width */
+  display: block;
+}
+#main .post.featured .image.main img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: none;
+  transition: transform 0.5s ease;
+}
+#main .post.featured:hover .image.main img {
+  transform: scale(1.03);
+}
+
+/* Featured Post Actions - Center button */
+#main .post.featured .actions.special {
+  padding: 2.5rem 0 0 0;
+  justify-content: center; /* Ensure button is centered */
+  display: flex; /* Add flex display if missing */
+  list-style: none; /* Ensure bullets are removed */
+}
+
+/* Featured Post Button - Adjusted for white bg */
+#main .post.featured .button.large {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: #111827; /* Dark button */
+  color: #ffffff;
+}
+#main .post.featured .button.large:hover {
+  background: #374151; /* Lighter dark hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Styling for the regular posts container --- */
+#main .posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns by default */
+  gap: 2rem; /* Spacing between cards */
+  margin-top: 3rem; /* Add space below the featured post */
+}
+
+/* --- Keep Regular Posts Dark --- */
+#main .posts article {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+#main .posts article:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+#main .posts article .image.fit {
+  /* Style remains dark */
+  margin: 0;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+#main .posts article .image.fit img {
+  /* Style remains dark */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+#main .posts article:hover .image.fit img {
+  /* Style remains dark */
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+#main .posts article header {
+  /* Style remains dark */
+  padding: 1.5rem 1.5rem 0rem;
+}
+#main .posts article header h2 {
+  /* Style remains dark */
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--light-text);
+  border-bottom: none;
+  padding-bottom: 0;
+  text-transform: none;
+}
+#main .posts article header h2 a {
+  /* Style remains dark */
+  color: var(--light-text);
+  background-image: linear-gradient(transparent 80%, var(--primary-color-25) 20%);
+  padding-bottom: 0.1rem;
+  display: inline; /* Reset display if needed */
+}
+#main .posts article header h2 a:hover {
+  /* Style remains dark */
+  color: var(--light-text);
+  background-size: 100% 100%;
+}
+#main .posts article p {
+  /* Style remains dark */
+  padding: 0 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--muted-text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: none; /* Reset max-width */
+  text-align: left; /* Reset text align */
+}
+#main .posts article .tags {
+  /* Style remains dark */
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start; /* Reset justify */
+}
+#main .posts article .tag {
+  /* Style remains dark */
+  background: var(--tag-bg);
+  color: var(--muted-text);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+#main .posts article .tag:hover {
+  /* Style remains dark */
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--light-text);
+}
+#main .posts article .actions {
+  /* Style remains dark */
+  padding: 0 1.5rem 1.5rem;
+  margin-top: auto;
+  justify-content: flex-start; /* Reset justify */
+  list-style: none; /* Remove list bullets */
+}
+#main .posts article .button {
+  /* Style remains dark */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.7rem 1.25rem;
+  border-radius: 6px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+}
+#main .posts article .button:hover {
+  /* Style remains dark */
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+}
+
+/* Footer (Unified & Refined) */
+#footer {
+  background: var(--darker-bg);
+  color: var(--muted-text);
+  padding: 4rem 1.5rem 4rem; /* Equal top/bottom padding */
+  border-top: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+/* Keep background pattern if desired, adjust z-index if needed */
+#footer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image:
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.03) 0%, transparent 35%),
+    radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.03) 0%, transparent 35%);
+  z-index: 0; pointer-events: none;
+}
+
+#footer * { position: relative; z-index: 1; }
+
+/* Horizontal Grid Layout */
+#footer .split.contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjust minmax if needed */
+  gap: 2rem 3rem; /* Row and Column gap */
+  max-width: 1100px;
+  margin: 0 auto 4rem auto; /* Center grid, increased bottom margin */
+  padding: 0;
+  text-align: left;
+}
+
+#footer section {
+  margin-bottom: 0;
+}
+
+#footer section h3 {
+  margin-bottom: 1rem;
+  font-size: 0.9rem; /* Slightly smaller heading */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+#footer section p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Footer Icons */
+#footer .icons {
+  display: flex;
+  flex-direction: row; /* Explicitly set to horizontal */
+  justify-content: flex-start; /* Align left on desktop */
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  gap: 0.8rem; /* Slightly reduced gap */
+  flex-wrap: wrap; /* Allow wrapping if needed on very narrow views */
+}
+#footer .icons li a {
+  width: 40px; /* Back to slightly smaller icons */
+  height: 40px;
+  border-radius: 50%; /* Keep circular */
+  background-color: rgba(255, 255, 255, 0.07);
+}
+#footer .icons li a i.fab {
+  font-size: 1.1rem; /* Adjust icon size */
+}
+#footer .icons li a:hover {
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4); /* Adjusted glow */
+}
+
+/* Copyright */
+#copyright {
+  text-align: center;
+  padding: 2rem 0 1.5rem; /* Added 1.5rem bottom padding */
+  margin: 0 auto; /* Centered */
+  border-top: 1px solid var(--border-color);
+  color: rgba(255, 255, 255, 0.5); /* Slightly brighter */
+  width: 100%; /* Ensure it spans width for border */
+  max-width: 1100px; /* Match content width */
+  position: relative; /* Keep relative positioning */
+}
+#copyright ul {
+  display: flex; 
+  justify-content: center; 
+  list-style: none; /* Remove list bullets */
+  flex-wrap: wrap; 
+  padding: 0; 
+  margin: 0; 
+  gap: 0 1.5rem;
+  font-size: 0.8rem; /* Slightly smaller */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 736px) {
+  #footer {
+    padding: 3rem 1rem 3rem; /* Adjust mobile padding */
+  }
+  #footer .split.contact {
+    /* Stays as vertical flex stack */
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  #footer section h3 {
+    font-size: 1rem; /* Slightly larger on mobile */
+  }
+  #footer .icons {
+    justify-content: center;
+  }
+  #copyright {
+    padding: 1.5rem 0 1.5rem; /* Added bottom padding */
+  }
+  #intro .actions {
+    margin-top: -0.5rem; /* Negative margin-top for mobile (moves it further up) */
+    margin-bottom: 1.5rem; /* Keep space below button on mobile */
+  }
+  .intro-nav-wrapper {
+    margin-top: -2rem; /* Adjust overlap for mobile */
+    padding: 0 1rem;
+  }
+}
+
+/* Scroll to top button (from landing.css) */
+.scroll-to-top {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: 45px; height: 45px;
+  background-color: var(--primary-color);
+  color: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; opacity: 0; transform: translateY(20px);
+  transition: all 0.3s ease; z-index: 99;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.scroll-to-top.visible { opacity: 1; transform: translateY(0); }
+.scroll-to-top:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+}
+
+/* Animations (Combined) */
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+.animate-slide-up { opacity: 0; transform: translateY(30px); animation: slideUp 0.8s ease forwards; }
+
+/* Animation delay classes */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Reveal animations when scrolling */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Section transitions (from index.html style) */
+.section-transition { transition: opacity 0.5s ease, transform 0.5s ease; }
+/* (JS handles the opacity/display toggling) */
+
+/* Improved Focus States */
+a:focus, button:focus, .button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: none; /* Remove previous box-shadow focus */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+/* Responsive */
+@media screen and (max-width: 980px) {
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2rem; }
+  #intro h1 { font-size: 3.5rem; }
+
+  #nav > .inner { padding: 0 1rem; }
+  #nav ul.links li a { padding: 0.75rem 1rem; }
+  #main { padding: 3rem 1rem; }
+  .posts { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .post.featured { padding: 2rem; }
+  .post.featured header.major h2 { font-size: 2rem; }
+  #footer .split.contact { gap: 2rem; }
+
+  /* Adjust grid for medium screens if needed, 2 columns might still fit */
+  #main .posts {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; /* Slightly reduce gap */
+  }
+}
+
+@media screen and (max-width: 736px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 1.75rem; }
+  #intro h1 { font-size: 3rem; }
+  #intro p { font-size: 1.1rem; }
+
+  #nav { position: relative; /* Allow content to push down */ }
+  #nav > .inner {
+    padding: 0.6rem 1rem 0.4rem; /* Increased mobile top padding */
+    flex-wrap: wrap;
+    justify-content: center; /* Keep centered layout for mobile */
+    position: static; /* Ensure static positioning */
+  }
+  #nav ul.links {
+    order: 1;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  #nav ul.icons {
+    display: none; /* Hide icons on mobile */
+    /* order: 2; */
+    /* margin-top: 0; */
+    /* width: 100%; */
+    /* justify-content: center; */
+    /* gap: 1rem; */
+    /* position: static; */
+    /* transform: none; */
+    /* margin-bottom: 0.5rem; */
+  }
+  #nav ul.links li a {
+      padding: 0.6rem 1.2rem; /* Adjust padding for mobile */
+      font-size: 0.95rem; /* Adjust font size for mobile */
+  }
+
+  .posts { grid-template-columns: 1fr; }
+  .posts article header, .posts article p, .posts article .tags, .posts article .actions { padding-left: 1rem; padding-right: 1rem; }
+  .posts article header { padding-top: 1.25rem; }
+  .posts article header h2 { font-size: 1.4rem; }
+
+  .post.featured { padding: 1.5rem; }
+  .post.featured header.major { padding: 0 0 1rem 0; margin-bottom: 1.5rem; }
+  .post.featured header.major h2 { font-size: 1.8rem; }
+  .post.featured p { font-size: 1rem; max-width: 100%; }
+  .post.featured .tags, .post.featured .actions.special { padding-left: 0; padding-right: 0; }
+
+  #footer { padding: 3rem 1rem 1.5rem; }
+  #footer .split.contact { grid-template-columns: 1fr; gap: 1.5rem; }
+  #footer section { text-align: center; }
+  #footer .icons { justify-content: center; }
+
+  /* Stack posts in one column on small screens */
+  #main .posts {
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* Keep consistent gap */
+  }
+
+  /* Equal width stat items on mobile */
+  .stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 1rem; /* Adjust gap as needed */
+    justify-content: center; /* Center grid items if they don't fill width */
+    width: 100%; /* Ensure container takes full width */
+    max-width: 450px; /* Optional: Max width for the container */
+    margin: 2.5rem auto; /* Center container */
+  }
+
+  .stat-item {
+     min-width: initial; /* Remove min-width */
+     padding: 1rem; /* Adjust padding */
+     /* width: 100%; Ensures items fill grid cells */
+  }
+
+  .intro-nav-wrapper {
+    margin-top: -2rem; /* Adjust overlap for mobile */
+    gap: 1rem; /* Reduce gap */
+    padding: 0 1rem;
+  }
+
+  #nav {
+    position: relative; /* Set position relative on mobile */
+    width: 100%; /* Ensure full width */
+    border-radius: 6px; /* Adjust rounding */
+  }
+
+  #nav > .inner {
+    padding: 0.6rem 1rem 0.4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 { font-size: 2.25rem; }
+  #intro h1 { font-size: 2.5rem; }
+  #intro p { font-size: 1rem; }
+  .stat-item { min-width: 100px; padding: 0.8rem; }
+  .stat-number { font-size: 1.8rem; }
+
+  #main { padding: 2rem 1rem; }
+  .posts article .image.fit { height: 180px; }
+  .posts article header h2 { font-size: 1.3rem; }
+  .posts article p { font-size: 0.9rem; }
+
+  .post.featured { padding: 1rem; }
+  .post.featured header.major h2 { font-size: 1.6rem; }
+  .post.featured p { font-size: 0.95rem; }
+
+  #footer section p { font-size: 0.9rem; }
+  #footer .icons li a { width: 38px; height: 38px; font-size: 1.1rem; }
+  #copyright ul { gap: 0 1rem; }
+
+  /* Adjust stat items grid for very small screens if needed */
+  .stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Allow wrapping */
+    gap: 0.75rem;
+    max-width: 100%; /* Allow full width */
+  }
+}
+
+/* Cleanup Notes:
+   - Removed redundant styles covered by the merge.
+   - Standardized variable usage (--dark-bg, --card-bg, --light-text, etc.).
+   - Ensured dark theme from the image is applied correctly to .posts and .post.featured.
+   - Combined responsive queries where possible.
+   - Added comments for clarity.
+   - Moved floating element styles from index.html into this CSS.
+*/
+
+/* Intro Section Enhancements */
+
+/* Data-themed animated background elements */
+.data-particle {
+  /* position: absolute; */ /* Position handled by parent selector now */
+  border-radius: 50%;
+  opacity: 0;
+  /* z-index: 0; */
+  /* pointer-events: none; */
+  animation: fadeInOut 8s infinite ease-in-out;
+}
+
+.particle-1 { top: 15%; left: 10%; width: 6px; height: 6px; background: rgba(99, 102, 241, 0.5); animation-delay: 0s; }
+.particle-2 { top: 25%; left: 80%; width: 8px; height: 8px; background: rgba(16, 185, 129, 0.5); animation-delay: 1s; }
+.particle-3 { top: 65%; left: 35%; width: 5px; height: 5px; background: rgba(99, 102, 241, 0.5); animation-delay: 2s; }
+.particle-4 { top: 45%; left: 85%; width: 7px; height: 7px; background: rgba(16, 185, 129, 0.5); animation-delay: 3s; }
+.particle-5 { top: 75%; left: 15%; width: 6px; height: 6px; background: rgba(99, 102, 241, 0.5); animation-delay: 1.5s; }
+.particle-6 { top: 35%; left: 50%; width: 8px; height: 8px; background: rgba(16, 185, 129, 0.5); animation-delay: 2.5s; }
+
+/* Subtle connecting lines */
+.data-grid {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  background-position: 0 0, 0 0, -0.5px -0.5px, -0.5px -0.5px;
+  /* z-index: 0; */
+  /* pointer-events: none; */
+  opacity: 0.3;
+}
+
+/* Animated typing cursor effect for the subtitle */
+#intro h1 span::after {
+  content: '|';
+  display: inline-block;
+  opacity: 1;
+  animation: blink 1.4s infinite; /* Slower blink */
+  margin-left: 5px;
+  font-weight: 300; /* Thinner cursor */
+}
+
+/* Chart icon animation */
+.chart-icon {
+  /* position: absolute; */
+  width: 60px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInSlide 1s forwards ease-out;
+}
+
+.chart-icon.bar-1 { top: 30%; left: 8%; animation-delay: 0.5s; }
+.chart-icon.bar-2 { top: 60%; right: 8%; animation-delay: 1s; }
+
+.chart-icon::before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.chart-icon.bar-1::before {
+  height: 30px;
+  background: linear-gradient(to bottom, transparent 0%, transparent 20%, rgba(99, 102, 241, 0.3) 20%, rgba(99, 102, 241, 0.3) 30%, transparent 30%, transparent 50%, rgba(99, 102, 241, 0.5) 50%, rgba(99, 102, 241, 0.5) 85%, transparent 85%);
+}
+
+.chart-icon.bar-2::before {
+  height: 30px;
+  background: linear-gradient(to bottom, transparent 0%, transparent 10%, rgba(16, 185, 129, 0.3) 10%, rgba(16, 185, 129, 0.3) 45%, transparent 45%, transparent 60%, rgba(16, 185, 129, 0.5) 60%, rgba(16, 185, 129, 0.5) 75%, transparent 75%);
+}
+
+/* Animated circles for data points */
+.data-ring {
+  /* position: absolute; */
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0);
+  opacity: 0;
+  /* z-index: 0; */
+  /* pointer-events: none; */
+  animation: pulseRing 4s infinite ease-out;
+}
+
+.ring-1 { top: 20%; left: 20%; width: 100px; height: 100px; animation-delay: 0s; }
+.ring-2 { top: 70%; right: 20%; width: 150px; height: 150px; animation-delay: 1s; }
+
+/* New keyframes for data-themed animations */
+@keyframes fadeInOut {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0; }
+  50% { transform: translateY(-20px) scale(1.2); opacity: 0.7; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.8; } /* Never fully opaque */
+  50% { opacity: 0; } /* Fully transparent */
+}
+
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 0.7; transform: translateY(0); }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0); opacity: 0; }
+  15% { opacity: 0.15; }
+  30% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(0); opacity: 0; }
+} 
